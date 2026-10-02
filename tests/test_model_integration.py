@@ -12,7 +12,7 @@ from rapistops.status import Status
 
 def test_core_model_integration():
     source = Source(
-        id=1,
+        id=101,
         name="Test Source",
         type="public_record",
         organization="Test Organization",
@@ -21,7 +21,7 @@ def test_core_model_integration():
     )
 
     provenance = Provenance(
-        id=1,
+        id=202,
         source_id=source.id,
         collected_at="2024-06-01",
         collection_method="Test Method",
@@ -30,9 +30,9 @@ def test_core_model_integration():
     )
 
     record = Record(
-        id=1,
+        id=303,
         source_id=source.id,
-        provenance_id=1,
+        provenance_id=provenance.id,
         type="Test Record",
         title="Test Record",
         source_reference="record-1",
@@ -42,17 +42,17 @@ def test_core_model_integration():
     )
 
     evidence = Evidence(
-        id=1,
+        id=404,
         type="Test Evidence",
         source_id=source.id,
-        provenance_id=1,
+        provenance_id=provenance.id,
         record_id=record.id,
         reference="evidence-1",
         description="Test Evidence",
     )
 
     person = Person(
-        id=1,
+        id=505,
         name="Test Person",
         identifiers="person-1",
         description="Test Person",
@@ -61,7 +61,7 @@ def test_core_model_integration():
     )
 
     institution = Institution(
-        id=1,
+        id=606,
         name="Test Institution",
         type="agency",
         jurisdiction="Test Jurisdiction",
@@ -72,7 +72,7 @@ def test_core_model_integration():
     )
 
     event = Event(
-        id=1,
+        id=707,
         type="incident",
         title="Test Event",
         occurred_at="2024-05-01",
@@ -81,7 +81,7 @@ def test_core_model_integration():
     )
 
     case = Case(
-        id=1,
+        id=808,
         type="investigation",
         name="Test Case",
         identifier="CASE-001",
@@ -91,7 +91,7 @@ def test_core_model_integration():
     )
 
     status = Status(
-        id=1,
+        id=909,
         type="Reported",
         entity_id=case.id,
         effective_at="2024-05-01",
@@ -101,7 +101,7 @@ def test_core_model_integration():
     )
 
     relationship = Relationship(
-        id=1,
+        id=1010,
         source_entity_id=person.id,
         target_entity_id=case.id,
         type="associated_with",
@@ -113,9 +113,9 @@ def test_core_model_integration():
 
     assert provenance.source_id == source.id
     assert record.source_id == source.id
-    assert record.provenance_id == 1
+    assert record.provenance_id == provenance.id
     assert evidence.source_id == source.id
-    assert evidence.provenance_id == provenance.source_id
+    assert evidence.provenance_id == provenance.id
     assert evidence.record_id == record.id
     assert status.entity_id == case.id
     assert status.source_id == source.id
