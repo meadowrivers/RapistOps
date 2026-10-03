@@ -1,6 +1,6 @@
 from rapistops.case import Case
-from rapistops.evidence import Evidence
 from rapistops.event import Event
+from rapistops.evidence import Evidence
 from rapistops.institution import Institution
 from rapistops.person import Person
 from rapistops.provenance import Provenance
@@ -124,3 +124,5 @@ def test_core_model_integration():
     assert relationship.target_entity_id == case.id
     assert relationship.source_id == source.id
     assert relationship.record_id == record.id
+    assert institution.type == "agency"
+    assert event.type == "incident"
