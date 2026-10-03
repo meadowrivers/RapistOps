@@ -21,6 +21,17 @@ def test_save_provenance():
                 "DELETE FROM provenance WHERE id = %s",
                 (provenance.id,),
             )
+            cursor.execute(
+                "DELETE FROM source WHERE id = %s",
+                (provenance.source_id,),
+            )
+            cursor.execute(
+                """
+                INSERT INTO source (id, name, type)
+                VALUES (%s, %s, %s)
+                """,
+                (provenance.source_id, "Provenance Test Source", "public_record"),
+            )
 
         connection.commit()
     finally:
@@ -50,6 +61,10 @@ def test_save_provenance():
             cursor.execute(
                 "DELETE FROM provenance WHERE id = %s",
                 (provenance.id,),
+            )
+            cursor.execute(
+                "DELETE FROM source WHERE id = %s",
+                (provenance.source_id,),
             )
 
         connection.commit()

@@ -1,6 +1,6 @@
+from rapistops.database import get_connection
 from rapistops.source import Source
 from rapistops.source_storage import save_source
-from rapistops.database import get_connection
 
 
 def test_save_source():
